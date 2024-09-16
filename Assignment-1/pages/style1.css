@@ -1,18 +1,69 @@
-ul{
-    list-style-type: none;
-    background-color: rgb(212, 228, 228);
+*{
+    text-decoration: none;
+    margin: 0px;
+}
+
+.nav1{ 
+    background-color: rgb(57, 218, 54);
     margin: 0px;
     overflow: hidden;
+    display: inline-block;
+    width: 2000px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-top:10px ;
+    justify-content: space-between;
+
 }
+.navdiv{
+    display: flex;
+    padding-left: 40px;
+    padding-right: 40px;
+    justify-content: space-between;
+    align-items: center;
+}
+.div_logo{
+    padding-left: 20px;
+}
+
 li{
     display: inline;
-    background-color: aquamarine;
-    margin: 3px;
-    padding: 5px;
+    margin: 0px;
+    padding: 30px;
+    margin-top: 30px;
+    margin-right: 60px;
 }
-a{
-    color: rgb(88, 66, 33);
+
+li a{
+    font-size: 30;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    color: beige;
+    text-hover: black;
+
 }
-#id1{
-    background-color: brown;
+li button{
+    background-color: white;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    width: 70px;
+    border: none;
+    color: rgb(57, 218, 54);
+    font-size: 30;
+    font-weight: 700;
+}
+
+
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white; /* Button background color */
+    color: rgb(57, 218, 54);              /* Text color */
+    text-decoration: none;     /* Remove underline */
+    border-radius: 5px;        /* Rounded corners */
+    border: none;              /* Remove default border */
+    cursor: pointer;           /* Pointer cursor on hover */
 }
