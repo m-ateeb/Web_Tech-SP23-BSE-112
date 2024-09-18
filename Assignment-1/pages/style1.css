@@ -2,7 +2,10 @@
     text-decoration: none;
     margin: 0px;
 }
-
+body{
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .nav1{ 
     position: sticky;
     top:0;
@@ -14,6 +17,7 @@
     padding-left: 5px;
     padding-top:7px ;
     justify-content: space-between;
+    z-index: 5;
 
 }
 .navdiv{
@@ -22,6 +26,7 @@
     padding-right: 5px;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
 }
 .div_logo{
     padding-left: 20px;
@@ -65,18 +70,72 @@ li button{
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: white; /* Button background color */
-    color: rgb(57, 218, 54);              /* Text color */
-    text-decoration: none;     /* Remove underline */
-    border-radius: 5px;        /* Rounded corners */
-    border: none;              /* Remove default border */
-    cursor: pointer;           /* Pointer cursor on hover */
+    background-color: white; 
+    color: rgb(57, 218, 54);              
+    text-decoration: none;    
+    border-radius: 5px;        
+    border: none;              
+    cursor: pointer;           
 }
 
 
+.brands_img{
+    display: inline-block;
+    width: 200px;
+}
 
 
+div h2{
+   background-color: rgb(193, 220, 243);
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 
+@keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .logos {
+    overflow: hidden;
+    padding: 90px 0;
+    background: white;
+    white-space: nowrap;
+    position: relative;
+  }
+  
+  
+  .logos:hover .logos-slide {
+    animation-play-state: paused;
+  }
+  
+  .logos-slide {
+    padding-top: 40px;
+    display: inline-block;
+    animation: 35s slide infinite linear;
+  }
+  
+  .logos-slide img {
+    height: 150px;
+    margin: 0 40px;
+    width: 300px;
+  }
 
-
-
+  .footer_images{
+    background-color: aquamarine;
+  }
+  .footer_images img{
+    display: inline-block;
+    height: auto;
+    object-fit: cover;
+    width: 300px;
+    padding-top: 0px;
+    padding-left: 25px ;
+    padding-right: 25px;
+  }
