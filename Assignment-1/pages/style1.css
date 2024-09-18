@@ -12,7 +12,7 @@ body{
     background-color: rgb(57, 218, 54);
     margin: 0px;
     overflow: hidden;
-    display: inline-block;
+    display: flex;
     width: 1510px;
     padding-left: 5px;
     padding-top:7px ;
@@ -111,10 +111,6 @@ div h2{
   }
   
   
-  .logos:hover .logos-slide {
-    animation-play-state: paused;
-  }
-  
   .logos-slide {
     padding-top: 40px;
     display: inline-block;
@@ -129,13 +125,30 @@ div h2{
 
   .footer_images{
     background-color: aquamarine;
+    display: flex;
+    flex-direction: row;
+   
+    width: 1450px;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: transform 0.3s;
+    
   }
-  .footer_images img{
-    display: inline-block;
-    height: auto;
+  .foot_images {
+    display: inline-flex;
+    width: 200px; 
+    aspect-ratio: 1/1; 
+    overflow: hidden;;
+  }
+
+  .end_image{
+    width: 80%; 
+    height: 100%;
     object-fit: cover;
-    width: 300px;
-    padding-top: 0px;
-    padding-left: 25px ;
-    padding-right: 25px;
+    border-radius: 35px;
+  }
+
+  .footer-div{
+    background-color: aquamarine;
   }
