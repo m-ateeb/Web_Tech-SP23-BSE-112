@@ -13,7 +13,7 @@ router.get("/admin/products", (req, res) => {
       title: "Drink 2",
       price: "RS 140 ",
       description: "Energizing",
-      _id: 1,
+      _id: 2,
     },
   ];
   return res.render("admin/products", {
