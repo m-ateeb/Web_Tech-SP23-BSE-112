@@ -1,3 +1,7 @@
+window.onload = function(){
+    const gform = document.getElementById("submit");
+gform.onsubmit = handleFormSubmit;
+}
 function handleFormSubmit(event)
 {
     console.log("Handler Called");
@@ -13,7 +17,6 @@ function handleFormSubmit(event)
         console.log("Invalid Form");
         if (name==''||email==''|| city==''||address=='') {
             alert("please fill all the required fields");
-            document.getElementById("username").classList.add("error");
         }
         
         let errorMessage = document.getElementById("error-message");
@@ -27,8 +30,5 @@ function handleFormSubmit(event)
 
 
 
-window.onload = function(){
-    var gform = document.getElementById("submit");
-gform.onsubmit = handleFormSubmit;
-}
+
 

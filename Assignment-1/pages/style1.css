@@ -1,154 +1,246 @@
 *{
-    text-decoration: none;
-    margin: 0px;
+  text-decoration: none;
+  margin: 0px;
 }
 body{
-  overflow-x: hidden;
-  overflow-y: auto;
+overflow-x: hidden;
+overflow-y: auto;
 }
 .nav1{ 
-    position: sticky;
-    top:0;
-    background-color: rgb(57, 218, 54);
-    margin: 0px;
-    overflow: hidden;
-    display: flex;
-    width: 1510px;
-    padding-left: 5px;
-    padding-top:7px ;
-    justify-content: space-between;
-    z-index: 5;
+  position: sticky;
+  top:0;
+  background-color: rgb(57, 218, 54);
+  margin: 0px;
+  overflow: hidden;
+  display: flex;
+  width: 1510px;
+  padding-left: 5px;
+  padding-top:7px ;
+  justify-content: space-between;
+  z-index: 5;
 
 }
 .navdiv{
-    display: flex;
-    padding-left: 5px;
-    padding-right: 5px;
-    justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
 }
 .div_logo{
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 li{
-    display: inline;
-    margin: 0px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-right: 20px;
+  display: inline;
+  margin: 0px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 li a{
-    font-size: 30;
-    font-weight: 700;
-    font-family: Arial, Helvetica, sans-serif;
-    color: beige;
+  font-size: 30;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  color: beige;
 }
 li a:hover{
-    color: rgb(174, 231, 182);
+  color: rgb(174, 231, 182);
 }
 li button{
-    background-color: white;
-    padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 10px;
-    width: 70px;
-    border: none;
-    color: rgb(57, 218, 54);
-    font-size: 30;
-    font-weight: 700;
+  background-color: white;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  width: 70px;
+  border: none;
+  color: rgb(57, 218, 54);
+  font-size: 30;
+  font-weight: 700;
 }
 .button:hover{
-   background-color: rgb(206, 249, 206);
+ background-color: rgb(206, 249, 206);
 }
 
 
 
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: white; 
-    color: rgb(57, 218, 54);              
-    text-decoration: none;    
-    border-radius: 5px;        
-    border: none;              
-    cursor: pointer;           
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white; 
+  color: rgb(57, 218, 54);              
+  text-decoration: none;    
+  border-radius: 5px;        
+  border: none;              
+  cursor: pointer;           
 }
 
 
 .brands_img{
-    display: inline-block;
-    width: 200px;
+  display: inline-block;
+  width: 200px;
 }
 
 
 div h2{
-   background-color: rgb(193, 220, 243);
-    text-align: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ background-color: rgb(193, 220, 243);
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 @keyframes slide {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
+  from {
+    transform: translateX(0);
   }
-  
-  .logos {
-    overflow: hidden;
-    padding: 90px 0;
-    background: white;
-    white-space: nowrap;
-    position: relative;
+  to {
+    transform: translateX(-100%);
   }
-  
-  
-  .logos-slide {
-    padding-top: 40px;
-    display: inline-block;
-    animation: 35s slide infinite linear;
-  }
-  
-  .logos-slide img {
-    height: 150px;
-    margin: 0 40px;
-    width: 300px;
-  }
+}
 
-  .footer_images{
-    background-color: aquamarine;
-    display: flex;
-    flex-direction: row;
-   
-    width: 1450px;
-    text-align: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    transition: transform 0.3s;
-    
-  }
-  .foot_images {
-    display: inline-flex;
-    width: 200px; 
-    aspect-ratio: 1/1; 
-    overflow: hidden;;
-  }
+.logos {
+  overflow: hidden;
+  padding: 90px 0;
+  background: white;
+  white-space: nowrap;
+  position: relative;
+}
 
-  .end_image{
-    width: 80%; 
-    height: 100%;
-    object-fit: cover;
-    border-radius: 35px;
-  }
 
-  .footer-div{
-    background-color: aquamarine;
+.logos-slide {
+  padding-top: 40px;
+  display: inline-block;
+  animation: 35s slide infinite linear;
+}
+
+.logos-slide img {
+  height: 150px;
+  margin: 0 40px;
+  width: 300px;
+}
+
+.footer_images{
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: row;
+ 
+  width: 1450px;
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  transition: transform 0.3s;
+  
+}
+.foot_images {
+  display: inline-flex;
+  width: 200px; 
+  aspect-ratio: 1/1; 
+  overflow: hidden;;
+}
+
+.end_image{
+  width: 80%; 
+  height: 100%;
+  object-fit: cover;
+  border-radius: 35px;
+}
+
+.footer-div{
+  background-color: aquamarine;
+}
+
+.fotr-img{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+}
+.fotr-img img{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 15px;
+}
+
+.col{
+ position: absolute;
+  width: 25%;
+}
+
+.lastdiv{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.coulumn-0{
+  flex-direction: row;
+}
+
+
+.fotr-li{
+  align-items: center;
+  padding: 0px;
+}
+.col-1{
+  align-items: center;
+}
+.col-2{
+  float: right;
+}
+.footer_images{
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.last-div{
+  background-color: beige;
+  display: flex;
+ flex-direction: column;
+}
+
+
+
+
+
+
+
+
+.footer_images {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allows the images to wrap on smaller screens */
+  gap: 10px; /* Adds some space between images */
+}
+
+.foot-img {
+  flex: 1 1 22%; /* Each image takes up about 22% of the available width */
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.end_image {
+  width: 100%; /* Ensures that each image fills its container */
+  height: auto; /* Maintains the aspect ratio of images */
+  display: block;
+  object-fit: cover; /* Ensures that images fit nicely */
+}
+
+@media (max-width: 768px) {
+  .foot-img {
+      flex: 1 1 48%; /* On medium screens, each image takes up 48% width */
   }
+}
+
+@media (max-width: 480px) {
+  .foot-img {
+      flex: 1 1 100%; /* On small screens, images stack vertically */
+  }
+}
+

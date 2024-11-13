@@ -1,0 +1,277 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-primary {
+    background-color: rgba(255, 255, 255, 0.9); /* Light background with slight transparency */
+    padding: 15px 20px; /* Add padding for a better feel */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    border-radius: 8px; /* Slightly rounded corners */
+    position: relative; /* For proper stacking context */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.navbar-primary ul {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Use flex for horizontal layout */
+    justify-content: center; /* Center align the items */
+}
+
+.navbar-primary ul li {
+    margin: 0 15px;
+}
+
+.navbar-primary a {
+    color: #333; /* Dark text color */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar-primary a:hover {
+    color: #6a11cb; /* Change color on hover */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 221, 87, 0.6);
+    color: #333;
+}
+
+.hero {
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #ffdd57;
+    color: #333;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #f3c623;
+    transform: translateY(-2px);
+}
+
+section {
+    padding: 60px 20px;
+    margin: 20px 0;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #6a11cb;
+}
+
+.project-grid,
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.skill-item {
+    background: #e2e2e2;
+    border-radius: 5px;
+    padding: 15px;
+    flex: 1 1 120px;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.skill-item:hover {
+    background: #d1d1d1;
+}
+
+.profile-photo {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+    border: 3px solid #6a11cb;
+}
+
+footer {
+    background: #333;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form input,
+form textarea {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 500px;
+    transition: border 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #6a11cb;
+    outline: none;
+}
+
+form button {
+    background: #6a11cb;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+form button:hover {
+    background: #2575fc;
+    transform: translateY(-2px);
+}
+
+.experience-item,
+.education-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px 0;
+    transition: transform 0.3s ease;
+}
+
+.experience-item:hover,
+.education-item:hover {
+    transform: translateY(-3px);
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 5px solid #6a11cb;
+    padding: 10px 20px;
+    margin: 15px 0;
+    font-style: italic;
+}
+
+#resume {
+    text-align: center;
+}
+
+#project-description {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+#project-description-content {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+}
+.portfolio-photo{
+    width: fit-content;
+
+}
+.hero {
+    position: relative; /* For positioning context */
+    text-align: center;
+    padding: 60px 20px;
+    overflow: hidden; /* Hide overflow */
+}
+
+.portfolio-photo {
+    width: 100%; /* Full width of the hero div */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 15px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below the image */
+}
+
+.hero p {
+    font-size: 1.5em; /* Adjust font size */
+    margin: 20px 0; /* Space around the paragraph */
+    color: white; /* Text color */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for better readability */
+}
+
+.cta-container {
+    margin-top: 20px; /* Space between text and button */
+}
+
+.cta-button {
+    display: inline-block;
+    background: #ffdd57;
+    color: #333;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
