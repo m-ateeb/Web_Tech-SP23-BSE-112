@@ -1,0 +1,24 @@
+<h3><%-pageTitle  %></h3>
+
+<a href="/admin/createcategory" class="btn btn-info">Create New Category</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let index = 0; index < products.length; index++ ) { %>
+            <tr>
+                <td><%= products[index].category%></td>
+                <td><%= products[index].description %></td>
+                <td>
+                    <a href="/admin/editproduct/<%=products[index]._id%>" class="btn btn-warning">Edit</a>
+                    <a href="/admin/deleteproduct/<%=products[index]._id%>" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>

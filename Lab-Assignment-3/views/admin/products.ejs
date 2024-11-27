@@ -19,8 +19,8 @@
                 <td><%= products[index].price %></td>
                 <td><%= products[index].description %></td>
                 <td>
-                    <a href="/admin/products/edit" class="btn btn-warning">Edit</a>
-                    <a href="/admin/products/delete" class="btn btn-danger">Delete</a>
+                    <a href="/admin/editproduct/<%=products[index]._id%>" class="btn btn-warning">Edit</a>
+                    <a href="/admin/deleteproduct/<%=products[index]._id%>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <% } %>
