@@ -1,13 +1,16 @@
 const express = require("express");
 let router = express.Router();
-let { categoryModel, productModel } = require("../../models/product.model");
+let  productModel  = require("../../models/product.model");
 router.get("/admin/createproduct",(req,res)=>{
   return res.render("admin/createproduct",{layout:"adminlayout"});
 });
+
+
+
+
 //admin page route
 router.get("/admin/admin",async (req, res) => {
   let products = await productModel.find();
-  let category=await categoryModel.find();
   return res.render("admin", {
     layout: "adminlayout",
     pageTitle: "Manage Your Products",
@@ -16,7 +19,7 @@ router.get("/admin/admin",async (req, res) => {
 });
 router.post("/admin/createproduct",async(req,res)=>{
   let data=req.body
-  let newProduct=new Product(data);
+  let newProduct=new productModel(data);
   newProduct.title=data.title;
   await newProduct.save();
   return res.redirect("/admin/products");

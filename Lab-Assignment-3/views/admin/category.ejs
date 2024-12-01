@@ -4,19 +4,21 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Category</th>
+            <th>id</th>
+            <th>Title</th>
             <th>Description</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <% for( let index = 0; index < products.length; index++ ) { %>
+        <% for( let index = 0; index < category.length; index++ ) { %>
             <tr>
-                <td><%= products[index].category%></td>
-                <td><%= products[index].description %></td>
+                <td><%= category[index]._id %></td>
+                <td><%= category[index].title %></td>
+                <td><%= category[index].description %></td>
                 <td>
-                    <a href="/admin/editproduct/<%=products[index]._id%>" class="btn btn-warning">Edit</a>
-                    <a href="/admin/deleteproduct/<%=products[index]._id%>" class="btn btn-danger">Delete</a>
+                    <a href="/admin/editcategory/<%=category[index]._id%>" class="btn btn-warning">Edit</a>
+                    <a href="/admin/deletecategory/<%=category[index]._id%>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <% } %>

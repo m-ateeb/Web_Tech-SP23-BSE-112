@@ -1,16 +1,12 @@
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 
-let categoryschema=mongoose.Schema({
-    category:String,
-    description:String,
-});
-let categoryModel=mongoose.model("Category",categoryschema);
-let productschema=mongoose.Schema({
-    title:String,
-    description:String,
-    price:Number,
-    category: { type: mongoose.Schema.Types.ObjectId, ref: "categoryModel", required: true },
+const productSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  price: Number,
 });
 
-let productModel=mongoose.model("Product",productschema);
-module.exports={categoryModel,productModel};
+// Check if the model already exists to prevent overwriting it
+const productModel = mongoose.models.Product || mongoose.model("Product", productSchema);
+
+module.exports = productModel;  // Export the model correctly
