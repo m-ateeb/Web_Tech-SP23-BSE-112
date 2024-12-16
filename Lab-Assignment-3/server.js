@@ -6,6 +6,7 @@ var expressLayouts = require("express-ejs-layouts");
 app.set("view engine","ejs");
 app.use(expressLayouts);
 app.use(express.static("public"));
+app.use(express.static("uploads"));
 app.use(express.urlencoded());
 
 let adminProductsRouter = require("./routes/admin/products.controller");
