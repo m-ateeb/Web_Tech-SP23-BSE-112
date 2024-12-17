@@ -1,18 +1,8 @@
-
-<% if (messages && messages.success) { %>
-    <div style="color: green;">
-      <%= messages.success %>
-    </div>
-  <% } %>
-
-  <% if (messages && messages.error) { %>
-    <div style="color: red;">
-      <%= messages.error %>
-    </div>
-  <% } %>
-
 <form action="" method="post">
-    
+    <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" class="form-control" name="name" value="Usman Akram"/>
+    </div>
     <div class="form-group">
         <label for="">Email</label>
         <input type="text" class="form-control" name="email" value="usman.akram@gmail.com"/>
@@ -21,5 +11,5 @@
         <label for="">Password</label>
         <input type="password" class="form-control" name="password" value="usman"/>
     </div>
-    <button type="submit" class="btn btn-info">Login</button>
+    <button type="submit" class="btn btn-info">Register</button>
 </form>

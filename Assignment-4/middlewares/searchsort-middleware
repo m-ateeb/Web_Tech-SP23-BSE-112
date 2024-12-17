@@ -1,0 +1,53 @@
+const productModel = require("../models/product.model");
+
+const searchSortMiddleware = async (req, res, next) => {
+  try {
+    const { search, category, sort, page = 1, pageSize = 10 } = req.query;
+
+    // Create filter object
+    const filter = {};
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } }, // Case-insensitive search for title
+        { description: { $regex: search, $options: "i" } }, // Search in description
+      ];
+    }
+    if (category) {
+      filter.category = category;
+    }
+
+    // Create sort object
+    const sortOption = {};
+    if (sort === "title") {
+      sortOption.title = 1; // Ascending by title
+    } else if (sort === "price") {
+      sortOption.price = 1; // Ascending by price
+    }
+
+    // Pagination calculation
+    const totalRecords = await productModel.countDocuments(filter);
+    const totalPages = Math.ceil(totalRecords / pageSize);
+
+    // Fetch filtered, sorted, and paginated products
+    const products = await productModel
+      .find(filter)
+      .sort(sortOption)
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    // Attach results to `res.locals` for use in the controller
+    res.locals.products = products;
+    res.locals.totalRecords = totalRecords;
+    res.locals.totalPages = totalPages;
+    res.locals.page = Number(page);
+    res.locals.pageSize = Number(pageSize);
+    res.locals.filter = { search, category, sort };
+
+    next();
+  } catch (error) {
+    console.error("Error in searchSortMiddleware:", error);
+    res.status(500).send("Error applying search, sort, or pagination.");
+  }
+};
+
+module.exports = searchSortMiddleware;

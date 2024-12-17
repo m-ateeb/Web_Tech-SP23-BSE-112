@@ -1,100 +1,160 @@
 const express = require("express");
 let router = express.Router();
-let multer=require("multer");
-const storage=multer.diskStorage({
-  destination:function(req,file,cb){
-    cb(null,"./uploads");
-},
-filename:function(req,file,cb){
-  cb(null, `${Date.now()}-${file.originalname}`);
-},
-});
-const upload=multer({storage:storage});
-let  productModel  = require("../../models/product.model");
-router.get("/admin/createproduct",(req,res)=>{
-  return res.render("admin/createproduct",{layout:"adminlayout"});
-});
+let multer = require("multer");
+const productModel = require("../../models/product.model");
+const categoryModel = require("../../models/category.model"); // Assuming you have a category model
+const searchSortMiddleware = require("../../middlewares/searchsort-middleware");
+const cloudinary = require("../../config/cloudinary.config"); // Import your Cloudinary config
 
+// Multer configuration to store images in memory (instead of saving to disk)
+const storage = multer.memoryStorage(); // Store the image in memory (no local file saving)
+const upload = multer({ storage: storage });
 
-
-
-//admin page route
-router.get("/admin/admin",async (req, res) => {
-  let products = await productModel.find();
-  return res.render("admin", {
-    layout: "adminlayout",
-    pageTitle: "Manage Your Products",
-    products,
-  });
-});
-router.post("/admin/createproduct",upload.single("file"),
-  async(req,res)=>{
-  let data=req.body
-  let newProduct=new productModel(data);
-  newProduct.title=data.title;
-  if (req.file) {
-    newProduct.picture = req.file.filename;
+// Route to render the "Create Product" form with categories
+router.get("/admin/createproduct", async (req, res) => {
+  try {
+    // Fetch categories from the database
+    let categories = await categoryModel.find();
+    return res.render("admin/createproduct", {
+      layout: "adminlayout",
+      categories, // Pass categories to the form
+    });
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(500).send("Error fetching categories");
   }
-  await newProduct.save();
-  return res.redirect("/admin/products");
 });
-router.get("/admin/products/:page?", async (req, res) => {
-  let page = req.params.page;
-  page = page ? Number(page) : 1;
-  let pageSize = 1;
 
-  // Get the total number of records
-  let totalRecords = await productModel.countDocuments();
-  
-  // Calculate total pages
-  let totalPages = Math.ceil(totalRecords / pageSize);
+// Route to handle product creation
+router.post("/admin/createproduct", upload.single("file"), async (req, res) => {
+  let data = req.body;
 
-  // Fetch the products for the current page
-  let products = await productModel.find()
-    .limit(pageSize)
-    .skip((page - 1) * pageSize);
+  // Log the request details for debugging
+  console.log("Received Data:", data);
+  console.log("Received File:", req.file);
 
-  // Return the products and pagination information
-  //res.send({ products, totalPages, currentPage: page });
-  //return res.send({ page });
-  // Alternatively, you can use res.render if you are rendering HTML pages instead of sending JSON
-  return res.render("admin/products", {
-    layout: "adminlayout",
-    pageTitle: "Manage Your Products",
-    products,
-    page,
-    pageSize,
-    totalPages,
-    totalRecords,
+  let newProduct = new productModel({
+    title: data.title,
+    description: data.description,
+    price: data.price,
+    category: data.category, // Category ID from the select dropdown
   });
+
+  try {
+    if (req.file) {
+      console.log("Uploading image to Cloudinary...");
+
+      // Upload the image to Cloudinary using the buffer from memory
+      cloudinary.uploader.upload_stream(
+        { resource_type: "image" }, // Specify it's an image
+        async (error, cloudinaryResult) => {
+          if (error) {
+            console.error("Error uploading image to Cloudinary:", error);
+            return res.status(500).send("Error uploading image");
+          }
+
+          console.log("Cloudinary Upload Success:", cloudinaryResult);
+          // Set the Cloudinary URL to the product's picture field
+          newProduct.picture = cloudinaryResult.secure_url; // Cloudinary image URL
+
+          try {
+            // Save the product with the image URL
+            await newProduct.save();
+            console.log("Product saved successfully");
+            return res.redirect("/admin/products"); // Redirect to products page
+          } catch (saveError) {
+            console.error("Error saving product:", saveError);
+            return res.status(500).send("Error saving product");
+          }
+        }
+      ).end(req.file.buffer); // Upload image buffer to Cloudinary
+    } else {
+      // If no image is uploaded, save the product without a picture
+      console.log("No file uploaded, saving product without picture");
+      await newProduct.save();
+      return res.redirect("/admin/products");
+    }
+  } catch (error) {
+    console.error("Error creating product:", error);
+    return res.status(500).send("Error creating product");
+  }
 });
 
+// Route to fetch and display all products with search, sort, and pagination
+router.get("/admin/products", searchSortMiddleware, async (req, res) => {
+  try {
+    // Fetch unique categories for filtering
+    const categories = await categoryModel.find();
 
+    // Use results from middleware
+    const { products, totalPages, page, pageSize, totalRecords, filter } = res.locals;
+
+    return res.render("admin/products", {
+      layout: "adminlayout",
+      pageTitle: "Manage Your Products",
+      products,
+      totalPages,
+      page,
+      pageSize,
+      totalRecords,
+      categories, // Categories for filter dropdown
+      searchQuery: filter.search || "",
+      selectedCategory: filter.category || "",
+      sortOption: filter.sort || "",
+    });
+  } catch (error) {
+    console.error("Error rendering products:", error);
+    res.status(500).send("Error rendering products.");
+  }
+});
+
+// Route to delete a product
 router.get("/admin/deleteproduct/:id", async (req, res) => {
-  let params = req.params.id;
-  let product = await productModel.findByIdAndDelete(req.params.id);
-  // let query = req.query;
-  // return res.send({ query, params });
-  // return res.send(product);
-  return res.redirect("/admin/products");
+  try {
+    let params = req.params.id;
+    await productModel.findByIdAndDelete(params);
+    return res.redirect("/admin/products");
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    res.status(500).send("Error deleting product");
+  }
 });
 
-//route to render edit product form
+// Route to render the "Edit Product" form
 router.get("/admin/editproduct/:id", async (req, res) => {
-  let product = await productModel.findById(req.params.id);
-  return res.render("admin/editproduct", {
-    layout: "adminlayout",
-    product,
-  });
-});
-router.post("/admin/editproduct/:id", async (req, res) => {
-  let product = await productModel.findById(req.params.id);
-  product.title = req.body.title;
-  product.description = req.body.description;
-  product.price = req.body.price;
-  await product.save();
-  return res.redirect("/admin/products");
+  try {
+    let product = await productModel.findById(req.params.id).populate("category");
+    let categories = await categoryModel.find(); // Fetch categories for editing
+    return res.render("admin/editproduct", {
+      layout: "adminlayout",
+      product,
+      categories, // Pass categories to the form
+    });
+  } catch (error) {
+    console.error("Error fetching product or categories:", error);
+    res.status(500).send("Error fetching product or categories");
+  }
 });
 
+// Route to handle product updates
+router.post("/admin/editproduct/:id", upload.single("file"), async (req, res) => {
+  try {
+    let product = await productModel.findById(req.params.id);
+    product.title = req.body.title;
+    product.description = req.body.description;
+    product.price = req.body.price;
+    product.category = req.body.category; // Update category
+
+    if (req.file) {
+      product.picture = req.file.filename;
+    }
+
+    await product.save();
+    return res.redirect("/admin/products");
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).send("Error updating product");
+  }
+});
 
 module.exports = router;

@@ -1,0 +1,51 @@
+  
+    <div class="container-fluid bg-success">
+        <nav class="navbar navbar-expand-xl custom-navbar navbar-light " >
+           <ul>
+            <li>
+                <a href="/" class="search-icon">
+                  <i class="fa fa-search"></i> Search
+                </a>
+                <form action="/search" method="GET" class="search-form">
+                  <input type="text" name="query" placeholder="Search..." />
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+              </li>
+           </ul>
+           
+    
+            <div class="div_logo" style="align-content: center;padding-left: 6pc;" >
+                <a href="pakola_home_page.html">
+                    <img src="pakola-logo_120x.avif" alt="Pakola Logo" class="logo-img" style="align-items: center;">
+                </a>
+            </div>
+            <button class="navbar-toggler btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarNav"style="align-items:center">
+            <ul class="navbar-nav" style="margin-left: 20px;">
+            <li class="lists" style=" padding: 18px;"><a href="pakola_water.html" style="color:white;">PAKOLA WATER</a></li>
+            <li class="lists" style="padding: 18px;"><a href="pakola_carbonated_drinks.html"  style="color:white;">CARBONATED DRINKS</a></li>
+            <li class="lists" style="padding: 18px;"><a href="pakola_bundles.html" style="color:white;">BUNDLES</a></li>
+            <li class="lists" style="padding: 18px;"><a href="pakola_merchandise.html" style="color:white;">MERCHANDISE</a></li>
+            <li class="lists" style="padding: 18px;"><a href="pakola_cordialsyrups.html" style="color:white;">CORDIAL SYRUPS</a></li>
+            <li class="lists" style="padding: 18px;"><a href="pakola_careers.html" style="color:white;">CAREERS</a></li>
+            <li class="lists" style="padding: 18px;"><a href="/cart" style="color:white;">CART</a></li>
+
+                <% console.log('User in view:', user); %>
+                <% if (user) { %>
+                    <li class="lists" style="padding: 20px;"><a href="/logout" style="color:white;">LOGOUT</a></li>
+                <% } else { %>
+                    <li class="lists" style="padding: 20px;"><a href="/login" style="color:white;">LOGIN</a></li>
+                <% } %>
+                <% if (user && user.role && user.role.includes("admin")) { %>
+                    <li class="lists" style="padding: 20px;">
+                      <a href="/admin/products" style="color:white;" class="button">ADMIN</a>
+                    </li>
+                  <% } %>
+                  
+              
+           </ul>
+        </div>
+    </nav>
+    </div>

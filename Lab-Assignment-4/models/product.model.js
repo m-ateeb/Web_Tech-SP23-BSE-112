@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema({
   description: String,
   picture:String,
   price: Number,
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }, 
 });
 
 // Check if the model already exists to prevent overwriting it
