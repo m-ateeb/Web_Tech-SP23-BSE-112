@@ -9,7 +9,7 @@ router.get('/checkout', async (req, res) => {
           const { name, email, address } = req.body;
       
           // Save order to database
-          const order = new Order({
+          const order = new order({
             user: user._id,
             items: user.cart, // Assuming cart is stored in user schema
             totalAmount: user.cart.reduce((total, item) => total + item.quantity * item.price, 0),

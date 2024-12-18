@@ -1,0 +1,72 @@
+<div class="container mt-5">
+    <h3>Checkout</h3>
+    <form action="" method="POST" id="checkoutForm">
+        <!-- Full Name -->
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="form-group">
+            <label for="address">Shipping Address</label>
+            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your shipping address" required></textarea>
+        </div>
+
+        <!-- Total Price (Readonly) -->
+        <div class="form-group">
+            <label for="total">Total Amount</label>
+            <input type="text" class="form-control" id="total" name="total" value="<%= totalAmount %>" readonly>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select class="form-control" id="paymentMethod" name="paymentMethod" required>
+                <option value="cashOnDelivery">Cash on Delivery</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+    </form>
+</div>
+
+
+<script>
+    // Checkout form submission handling
+const checkoutForm = document.getElementById('checkout-form');
+checkoutForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(checkoutForm);
+
+    fetch('/checkout', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            document.getElementById('order-confirmation').style.display = 'block';
+            checkoutForm.style.display = 'none';
+        } else {
+            alert('Something went wrong. Please try again.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>

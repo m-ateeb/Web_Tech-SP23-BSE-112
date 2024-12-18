@@ -2,6 +2,7 @@ const express = require("express");
 const { Server } = require("http");
 let app = express();
 let Product = require("./models/product.model");
+let user = require("./models/user.model");
 const Cart = require("./models/cart.model");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
@@ -161,13 +162,10 @@ app.get('/remove-from-cart/:id', async (req, res) => {
   const productId = req.params.id;  // Get the productId from the URL
   
   // Ensure user is logged in
-  if (!req.user) {
-      return res.redirect('/login');
-  }
-
+  
   try {
       // Find the cart associated with the logged-in user
-      const cart = await Cart.findOne({ userId: req.user } );
+      const cart = await Cart.findOne({ userId: req.user._id } );
       if (!cart) {
           return res.redirect('/cart');  // If cart doesn't exist
       }

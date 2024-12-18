@@ -1,0 +1,48 @@
+<div class="container">
+    <h4>Products in Cart</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let totalAmount = 0; %>
+            <% products.forEach(product => { %>
+                <% let productTotal = product.price * product.quantity; %>
+                <% totalAmount += productTotal; %>
+                <tr>
+                    <td><%= product.title %></td>
+                    <td>PKR <%= product.price.toFixed(2) %></td>
+                    <td>
+                        <!-- Quantity update with + and - buttons -->
+                        <form action="/update-quantity/<%= product._id %>" method="POST" style="display:inline;">
+                            <button type="submit" name="action" value="decrease" class="btn btn-sm btn-secondary">-</button>
+                            <input type="number" name="quantity" value="<%= product.quantity %>" min="1" style="width: 60px; text-align: center;">
+                            <button type="submit" name="action" value="increase" class="btn btn-sm btn-secondary">+</button>
+                        </form>
+                    </td>
+                    <td>PKR <%= productTotal.toFixed(2) %></td>
+                    <td>
+                        <form action="/remove-from-cart/<%= product._id %>" method="GET" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col">
+            <h5>Total: PKR <%= totalAmount.toFixed(2) %></h5>
+        </div>
+    </div>
+
+    <!-- Checkout Button -->
+    <a href="/checkout" class="btn btn-success">Checkout</a>
+</div>
