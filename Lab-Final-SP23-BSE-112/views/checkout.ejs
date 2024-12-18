@@ -28,7 +28,7 @@
         <!-- Total Price (Readonly) -->
         <div class="form-group">
             <label for="total">Total Amount</label>
-            <input type="text" class="form-control" id="total" name="total" value="<%= totalAmount %>" readonly>
+            <input type="text" class="form-control" id="total" name="total" value= <%= totalAmount.toFixed(2) %> readonly>
         </div>
 
         <!-- Payment Method -->

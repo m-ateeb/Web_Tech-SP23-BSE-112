@@ -1,475 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pakola Website</title>
     <style>
-        *{
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-    
+      * {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
 
-.product-container {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center; 
-      align-items: center;
-      padding: 5px;
-    }
+      .product-container {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+      }
 
-    .product-cards .card {
-      height: 100%; 
-    }
+      .product-cards .card {
+        height: 100%;
+      }
 
-    .product-cards {
-      margin-bottom: 20px; 
-    }
-    .social-list li{
+      .product-cards {
+        margin-bottom: 20px;
+      }
+      .social-list li {
         padding: 10px;
-    }
+      }
 
+      @keyframes slide {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
 
+      .logos {
+        overflow: hidden;
+        padding: 90px 0;
+        background: white;
+        white-space: nowrap;
+        position: relative;
+      }
 
-    @keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
+      .logos-slide {
+        padding-top: 40px;
+        display: flex;
+        flex-direction: row;
+        animation: 35s slide linear;
+      }
+      /* Styling for the search bar in the navbar */
+      nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
 
-.logos {
-  overflow: hidden;
-  padding: 90px 0;
-  background: white;
-  white-space: nowrap;
-  position: relative;
-}
+      .search-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        padding: 10px;
+        text-decoration: none;
+      }
 
+      .search-form {
+        display: none;
+        position: initial;
+        top: 30px;
+        left: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 5px;
+        width: 200px;
+      }
 
-.logos-slide {
-  padding-top: 40px;
-  display: flex;
-  flex-direction: row;
-  animation: 35s slide  linear;
-}
-/* Styling for the search bar in the navbar */
-nav ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-}
+      .search-form input {
+        border: none;
+        padding: 5px;
+        width: 80%;
+      }
 
-.search-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  padding: 10px;
-  text-decoration: none;
-}
+      .search-form button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+      }
 
-.search-form {
-  display: none;
-  position:initial;
-  top: 30px;
-  left: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  padding: 5px;
-  width: 200px;
-}
-
-.search-form input {
-  border: none;
-  padding: 5px;
-  width: 80%;
-}
-
-.search-form button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-}
-
-/* Show the search form when search icon is clicked */
-.search-icon:hover + .search-form,
-.search-form:hover {
-  display: block;
-}
-
-
-
+      /* Show the search form when search icon is clicked */
+      .search-icon:hover + .search-form,
+      .search-form:hover {
+        display: block;
+      }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
 
+  <body>
+    <%- include('partials/pagemenu') %>
 
-
-
-
-
-<body>
-   
-  <%- include('partials/pagemenu') %>
-  
-     <div class="video">
-        <video width="100%" height="100%" autoplay muted loop>
-            <source src="pakola_video.mp4" type="video/mp4">
-        </video>
+    <div class="video">
+      <video width="100%" height="100%" autoplay muted loop>
+        <source src="pakola_video.mp4" type="video/mp4" />
+      </video>
     </div>
 
     <div class="logos">
-        <div class="text-center ">
-          <h2>Our Brands</h2>
-        </div>
-      
-
-          <div class="logos-slide">
-            <div class="card logo-card">
-              <img src="brand_image_1.avif" class="card-img-top" alt="Brand 1" />
-            </div>
-            <div class="card logo-card">
-              <img src="brand_image_2.avif" class="card-img-top" alt="Brand 2" />
-            </div>
-            <div class="card logo-card">
-              <img src="brand_image_3.avif" class="card-img-top" alt="Brand 3" />
-            </div>
-            <div class="card logo-card">
-              <img src="brand_image_4.avif" class="card-img-top" alt="Brand 4" />
-            </div>
-            <div class="card logo-card">
-              <img src="brand_image_5.avif" class="card-img-top" alt="Brand 5" />
-            </div>
-            <div class="card logo-card">
-              <img src="brand_image_6.avif" class="card-img-top" alt="Brand 6" />
-            </div>
-          
-            <div class="card logo-card">
-              <img src="brand_image_1.avif" class="card-img-top" alt="Brand 1" />
-            </div>
-            <div class="card logo-card">
-              <img src="brand_image_2.avif" class="card-img-top" alt="Brand 2" />
-            </div>
-            <div class="card logo-card">
-                <img src="brand_image_3.avif" class="card-img-top" alt="Brand 3" />
-              </div>
-              <div class="card logo-card">
-                <img src="brand_image_4.avif" class="card-img-top" alt="Brand 4" />
-              </div>
-              <div class="card logo-card">
-                <img src="brand_image_5.avif" class="card-img-top" alt="Brand 5" />
-              </div>
-              <div class="card logo-card">
-                <img src="brand_image_6.avif" class="card-img-top" alt="Brand 6" />
-              </div>
-          </div>
+      <div class="text-center">
+        <h2>Our Brands</h2>
       </div>
-      
-      
 
-      <div class="text-center pb-2">
-        <h2>New Arrivals</h2>
+      <div class="logos-slide">
+        <div class="card logo-card">
+          <img src="brand_image_1.avif" class="card-img-top" alt="Brand 1" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_2.avif" class="card-img-top" alt="Brand 2" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_3.avif" class="card-img-top" alt="Brand 3" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_4.avif" class="card-img-top" alt="Brand 4" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_5.avif" class="card-img-top" alt="Brand 5" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_6.avif" class="card-img-top" alt="Brand 6" />
+        </div>
+
+        <div class="card logo-card">
+          <img src="brand_image_1.avif" class="card-img-top" alt="Brand 1" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_2.avif" class="card-img-top" alt="Brand 2" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_3.avif" class="card-img-top" alt="Brand 3" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_4.avif" class="card-img-top" alt="Brand 4" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_5.avif" class="card-img-top" alt="Brand 5" />
+        </div>
+        <div class="card logo-card">
+          <img src="brand_image_6.avif" class="card-img-top" alt="Brand 6" />
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center pb-2">
+      <h2>New Arrivals</h2>
     </div>
     <div class="container product-container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-          <% for (let index = 0; index < products.length; index++) { %>
-              <div class="col product-cards">
-                  <div class="card text-center">
-                      <!-- Correct image and alt text -->
-                      <img src="<%= products[index].picture %>" alt="<%= products[index].title %>" />
-                      <div class="card-body">
-                          <!-- Title with correct HTML structure -->
-                          <h3 class="card-title"><%= products[index].title %></h3>
-                          <p class="card-text"><%= products[index].description %></p>
-                          <p class="card-text">PKR: <%= products[index].price %></p>
-                          <!-- Add to cart button -->
-                          <a href="/add-to-cart/<%= products[index]._id %>" class="btn btn-success">Add to Cart</a>
-                      </div>
-                  </div>
-              </div>
-          <% } %>
+        <% for (let index = 0; index < products.length; index++) { %>
+        <div class="col product-cards">
+          <div class="card text-center">
+            <!-- Correct image and alt text -->
+            <img
+              src="<%= products[index].picture %>"
+              alt="<%= products[index].title %>"
+            />
+            <div class="card-body">
+              <!-- Title with correct HTML structure -->
+              <h3 class="card-title"><%= products[index].title %></h3>
+              <p class="card-text"><%= products[index].description %></p>
+              <p class="card-text">PKR: <%= products[index].price %></p>
+              <!-- Add to cart button -->
+              <a
+                href="/add-to-cart/<%= products[index]._id %>"
+                class="btn btn-success"
+                >Add to Cart</a
+              >
+            </div>
+          </div>
+        </div>
+        <% } %>
       </div>
-  
+
       <% if (products && products.length === 0) { %>
-          <p>No products available.</p>
+      <p>No products available.</p>
       <% } %>
-  </div>
-  
-            
-  
-  
+    </div>
+
     <div class="text-center pb-4">
-        <h2>Best Sellers</h2>
+      <h2>Best Sellers</h2>
     </div>
     <div class="container product-container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-1.jpg" alt="Product 1" />
+            <div class="card-body">
+              <h3 class="card-title">Product 1</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
+            </div>
+          </div>
+        </div>
 
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="best_seller-1.jpg" alt="Product 1">
-              <div class="card-body">
-                <h3 class="card-title">Product 1</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-2.jpg" alt="Product 2" />
+            <div class="card-body">
+              <h3 class="card-title">Product 2</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-      
-          <div class="col product-cards">
-            <div class="card  text-center">
-              <img class="card-img-top" src="best_seller-2.jpg" alt="Product 2">
-              <div class="card-body">
-                <h3 class="card-title">Product 2</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-      
-          
-          <div class="col product-cards">
-            <div class="card  text-center">
-              <img class="card-img-top" src="best_seller-3.jpg" alt="Product 3">
-              <div class="card-body">
-                <h3 class="card-title">Product 3</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-      
-        
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="best_seller-4.jpg" alt="Product 4">
-              <div class="card-body">
-                <h3 class="card-title">Product 4</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-       
-       
+        </div>
 
-      
-        
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="best_seller-5.jpg" alt="Product 5">
-              <div class="card-body">
-                <h3 class="card-title">Product 5</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-3.jpg" alt="Product 3" />
+            <div class="card-body">
+              <h3 class="card-title">Product 3</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-          
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="best_seller-6.jpg" alt="Product 6">
-              <div class="card-body">
-                <h3 class="card-title">Product 6</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-4.jpg" alt="Product 4" />
+            <div class="card-body">
+              <h3 class="card-title">Product 4</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-         
-          <div class="col product-cards">
-            <div class="card  text-center">
-              <img class="card-img-top" src="best_seller-7.jpg" alt="Product 7">
-              <div class="card-body">
-                <h3 class="card-title">Product 7</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-5.jpg" alt="Product 5" />
+            <div class="card-body">
+              <h3 class="card-title">Product 5</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-          
-          <div class="col product-cards">
-            <div class="card  text-center">
-              <img class="card-img-top" src="best_seller-8.jpg" alt="Product 8">
-              <div class="card-body">
-                <h3 class="card-title">Product 8</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-6.jpg" alt="Product 6" />
+            <div class="card-body">
+              <h3 class="card-title">Product 6</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-7.jpg" alt="Product 7" />
+            <div class="card-body">
+              <h3 class="card-title">Product 7</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img class="card-img-top" src="best_seller-8.jpg" alt="Product 8" />
+            <div class="card-body">
+              <h3 class="card-title">Product 8</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
         </div>
       </div>
-      
-
-
-
-
-
-
-
-
+    </div>
 
     <div class="text-center">
-        <h2>Cordial Syrups</h2>
+      <h2>Cordial Syrups</h2>
     </div>
     <div class="container product-container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="cordial_syrup-1.jpg" alt="Product 1">
-              <div class="card-body">
-                <h3 class="card-title">Product 1</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="cordial_syrup-1.jpg"
+              alt="Product 1"
+            />
+            <div class="card-body">
+              <h3 class="card-title">Product 1</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-         
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="cordial_syrup-2.jpg" alt="Product 2">
-              <div class="card-body">
-                <h3 class="card-title">Product 2</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="cordial_syrup-2.jpg"
+              alt="Product 2"
+            />
+            <div class="card-body">
+              <h3 class="card-title">Product 2</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-         
-          <div class="col product-cards">
-            <div class="card  text-center">
-              <img class="card-img-top" src="cordial_syrup-3.jpg" alt="Product 3">
-              <div class="card-body">
-                <h3 class="card-title">Product 3</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="cordial_syrup-3.jpg"
+              alt="Product 3"
+            />
+            <div class="card-body">
+              <h3 class="card-title">Product 3</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
-      
-          
-          <div class="col product-cards">
-            <div class="card text-center">
-              <img class="card-img-top" src="cordial_syrup-4.jpg" alt="Product 4">
-              <div class="card-body">
-                <h3 class="card-title">Product 4</h3>
-                <p class="card-text">Another fantastic product for your needs.</p>
-                <p class="card-text">$29.99</p>
-                <button class="btn btn-success">Add to Cart</button>
-              </div>
+        </div>
+
+        <div class="col product-cards">
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="cordial_syrup-4.jpg"
+              alt="Product 4"
+            />
+            <div class="card-body">
+              <h3 class="card-title">Product 4</h3>
+              <p class="card-text">Another fantastic product for your needs.</p>
+              <p class="card-text">$29.99</p>
+              <button class="btn btn-success">Add to Cart</button>
             </div>
           </div>
         </div>
       </div>
-      
-
-
-
-      <div class="container bg-success  rounded-lg" style="border-radius: 15px;">
-    
-        <div class="row text-center mb-4">
-          <h2 class="mb-4">Follow Pakola on Instagram</h2>
-          <div class="col-6 col-md-3">
-            <img src="Screenshot (3).png" alt="Instagram Image 1" class="img-fluid mb-2">
-          </div>
-          <div class="col-6 col-md-3">
-            <img src="Screenshot (4).png" alt="Instagram Image 2" class="img-fluid mb-2">
-          </div>
-          <div class="col-6 col-md-3">
-            <img src="Screenshot (5).png" alt="Instagram Image 3" class="img-fluid mb-2">
-          </div>
-          <div class="col-6 col-md-3">
-            <img src="Screenshot (6).png" alt="Instagram Image 4" class="img-fluid mb-2">
-          </div>
-        </div>
     </div>
 
-
-      
-      
-        
-      
-         
-          <div class="row bg-light pt-5 pb-3  text-center">
-            
-            <div class="col-sm-4 mb-4 " >
-              <a href="pakola_home_page.html">
-                <img src="logo-fotr_250x.avif" alt="Pakola Logo" class="img-fluid mb-3">
-              </a>
-              <p>
-                Established on 14th August 1950, Pakola is the oldest and the leading beverage brand of our country. 
-                The flagship product Pakola Ice Cream Soda is nearly as young as the nation itself.
-              </p>
-              <p>Connect with Us</p>
-              <div class="">
-                <img src="facebook-app-symbol.png" alt="Facebook" class="me-2" width="30">
-                <img src="twitter.png" alt="Twitter" class="me-2" width="30">
-                <img src="instagram.png" alt="Instagram" class="me-2" width="30">
-                <img src="youtube.png" alt="YouTube" class="me-2" width="30">
-                <img src="linkedin.png" alt="LinkedIn" class="me-2" width="30">
-              </div>
-            </div>
-      
-            
-            <div class="col-sm-4 mb-4 text-center">
-                <ul class="list-unstyled social-list">
-                    <li>Our Products</li>
-                    <li>Water</li>
-                    <li>Careers</li>
-                    <li>Recipes</li>
-                    <li>News & Events</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                  </ul>
-            </div>
-      
-           
-            <div class="col-sm-4 text-center">
-              <h6>Contact Us</h6>
-              <p>+92-111-725-652 (9:00am – 5:00pm)</p>
-              <p>info@pakola.com.pk</p>
-              <h6>Head Office</h6>
-              <p>C/ 5-A, Manghopir Road, S.I.T.E., Karachi, Pakistan</p>
-              <h6>Faisalabad Factory</h6>
-              <p>Plot# 29A, Phase 1A, M3 Industrial City, Sahianwala, Faisalabad, Pakistan</p>
-            </div>
-          </div>
-      
+    <div class="container bg-success rounded-lg" style="border-radius: 15px">
+      <div class="row text-center mb-4">
+        <h2 class="mb-4">Follow Pakola on Instagram</h2>
+        <div class="col-6 col-md-3">
+          <img
+            src="Screenshot (3).png"
+            alt="Instagram Image 1"
+            class="img-fluid mb-2"
+          />
         </div>
-    
-       
+        <div class="col-6 col-md-3">
+          <img
+            src="Screenshot (4).png"
+            alt="Instagram Image 2"
+            class="img-fluid mb-2"
+          />
+        </div>
+        <div class="col-6 col-md-3">
+          <img
+            src="Screenshot (5).png"
+            alt="Instagram Image 3"
+            class="img-fluid mb-2"
+          />
+        </div>
+        <div class="col-6 col-md-3">
+          <img
+            src="Screenshot (6).png"
+            alt="Instagram Image 4"
+            class="img-fluid mb-2"
+          />
+        </div>
+      </div>
+    </div>
 
+    <div class="row bg-light pt-5 pb-3 text-center">
+      <div class="col-sm-4 mb-4">
+        <a href="pakola_home_page.html">
+          <img
+            src="logo-fotr_250x.avif"
+            alt="Pakola Logo"
+            class="img-fluid mb-3"
+          />
+        </a>
+        <p>
+          Established on 14th August 1950, Pakola is the oldest and the leading
+          beverage brand of our country. The flagship product Pakola Ice Cream
+          Soda is nearly as young as the nation itself.
+        </p>
+        <p>Connect with Us</p>
+        <div class="">
+          <img
+            src="facebook-app-symbol.png"
+            alt="Facebook"
+            class="me-2"
+            width="30"
+          />
+          <img src="twitter.png" alt="Twitter" class="me-2" width="30" />
+          <img src="instagram.png" alt="Instagram" class="me-2" width="30" />
+          <img src="youtube.png" alt="YouTube" class="me-2" width="30" />
+          <img src="linkedin.png" alt="LinkedIn" class="me-2" width="30" />
+        </div>
+      </div>
 
+      <div class="col-sm-4 mb-4 text-center">
+        <ul class="list-unstyled social-list">
+          <li>Our Products</li>
+          <li>Water</li>
+          <li>Careers</li>
+          <li>Recipes</li>
+          <li>News & Events</li>
+          <li>About Us</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
-</body>
+      <div class="col-sm-4 text-center">
+        <h6>Contact Us</h6>
+        <p>+92-111-725-652 (9:00am – 5:00pm)</p>
+        <p>info@pakola.com.pk</p>
+        <h6>Head Office</h6>
+        <p>C/ 5-A, Manghopir Road, S.I.T.E., Karachi, Pakistan</p>
+        <h6>Faisalabad Factory</h6>
+        <p>
+          Plot# 29A, Phase 1A, M3 Industrial City, Sahianwala, Faisalabad,
+          Pakistan
+        </p>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

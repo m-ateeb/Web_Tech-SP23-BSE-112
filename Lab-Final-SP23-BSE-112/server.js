@@ -2,12 +2,12 @@ const express = require("express");
 const { Server } = require("http");
 let app = express();
 let Product = require("./models/product.model");
-let user = require("./models/user.model");
+let User = require("./models/user.model");
+let Order=require("./models/order.model");
 const Cart = require("./models/cart.model");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
 var expressLayouts = require("express-ejs-layouts");
-let User = require("./models/user.model");
 let cookieParser = require("cookie-parser");
 app.use(cookieParser());
 let session = require("express-session");
@@ -75,6 +75,13 @@ app.post("/login", async (req, res) => {
 
   if (!user) return res.redirect("/register");
 
+  res.cookie('userId', user._id.toString(), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict', // Prevents CSRF
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  });
+
   let isValid = user.password == data.password;
   if (!isValid) return res.redirect("/login");
 
@@ -111,75 +118,63 @@ const adminMiddleware = require("./middlewares/admin-middleware");
 app.use("/", authMiddleware, adminMiddleware, adminProductsRouter);
 
 app.get("/cart", async (req, res) => {
-  let cart = req.cookies.cart;
-  cart = cart ? cart : [];
-  let products = await Product.find({ _id: { $in: cart } });
-  return res.render("cart", { products });
+  // Retrieve cart from cookies
+  let cart = req.cookies.cart || []; // Default to empty if no cookie is present
+
+  try {
+      // Fetch products from database based on cart items
+      const products = await Product.find({ _id: { $in: cart.map(item => item.productId) } });
+
+      // Map quantities to the fetched products
+      const cartDetails = products.map(product => {
+          const cartItem = cart.find(item => item.productId === product._id.toString());
+          return {
+              ...product.toObject(), // Convert Mongoose document to plain object
+              quantity: cartItem ? cartItem.quantity : 1,
+          };
+      });
+
+      // Pass the data to the view
+      res.render("cart", { products: cartDetails });
+  } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal Server Error");
+  }
 });
+
+
 app.get("/add-to-cart/:id", (req, res) => {
-  let cart = req.cookies.cart;
-  cart = cart ? cart : [];
-  cart.push(req.params.id);
-  res.cookie("cart", cart);
-  return res.redirect("/");
-});
-// Update product quantity in the cart
-app.post('/update-quantity/:id', async (req, res) => {
   const productId = req.params.id;
-  const action = req.body.action; // "increase" or "decrease"
-  const newQuantity = parseInt(req.body.quantity, 10);
-
-  // Ensure user is logged in
-  
-  try {
-      // Find the cart associated with the logged-in user
-      const cart = await Cart.findOne({ userId: req.user});
-
-      // Check if the product exists in the cart
-      const productInCart = cart.products.find(item => item.productId.toString() === productId);
-
-      if (!productInCart) {
-          return res.redirect('/cart');
-      }
-
-      // Update the quantity
-      if (action === 'increase') {
-          productInCart.quantity += 1;
-      } else if (action === 'decrease' && productInCart.quantity > 1) {
-          productInCart.quantity -= 1;
-      }
-
-      await cart.save();
-      res.redirect('/cart');
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+  let cart = req.cookies.cart || [];
+  const existingItem = cart.find(item => item.productId === productId);
+  if (existingItem) {
+      existingItem.quantity += 1;
+  } else {
+      cart.push({ productId, quantity: 1 });
   }
+  res.cookie("cart", cart);
+  res.redirect("/cart");
 });
 
-//remove from cart
-app.get('/remove-from-cart/:id', async (req, res) => {
-  const productId = req.params.id;  // Get the productId from the URL
-  
-  // Ensure user is logged in
-  
-  try {
-      // Find the cart associated with the logged-in user
-      const cart = await Cart.findOne({ userId: req.user._id } );
-      if (!cart) {
-          return res.redirect('/cart');  // If cart doesn't exist
-      }
-
-      // Remove the product from the cart
-      cart.products = cart.products.filter(product => product.productId.toString() !== productId);
-      await cart.save();
-
-      // Redirect to the cart page after removal
-      res.redirect('/cart');
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+app.post("/update-quantity/:id", (req, res) => {
+  const productId = req.params.id;
+  const action = req.body.action;
+  let cart = req.cookies.cart || [];
+  const cartItem = cart.find(item => item.productId === productId);
+  if (cartItem) {
+      if (action === "increase") cartItem.quantity += 1;
+      else if (action === "decrease" && cartItem.quantity > 1) cartItem.quantity -= 1;
   }
+  res.cookie("cart", cart);
+  res.redirect("/cart");
+});
+
+app.get("/remove-from-cart/:id", (req, res) => {
+  const productId = req.params.id;
+  let cart = req.cookies.cart || [];
+  cart = cart.filter(item => item.productId !== productId);
+  res.cookie("cart", cart);
+  res.redirect("/cart");
 });
 
 let connectionString = "mongodb://localhost:27017/Pakola";
