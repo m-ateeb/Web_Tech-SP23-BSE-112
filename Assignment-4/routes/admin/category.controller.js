@@ -4,15 +4,7 @@ let categoryModel = require("../../models/category.model");
 router.get("/admin/createcategory",(req,res)=>{
   return res.render("admin/createcategory",{layout:"adminlayout"});
 });
-//admin page route
-router.get("/admin/admin",async (req, res) => {
-  let category = await categoryModel.find();
-  return res.render("admin", {
-    layout: "adminlayout",
-    pageTitle: "Manage Your category",
-    category,
-  });
-});
+
 router.post("/admin/createcategory",async(req,res)=>{
   let data=req.body
   let newcategory=new categoryModel(data);

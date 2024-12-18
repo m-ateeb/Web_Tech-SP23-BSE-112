@@ -1,0 +1,61 @@
+<div class="container mt-4">
+    <h2>Order Management</h2>
+
+    <!-- Pending Orders -->
+    <h4>Pending Orders</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Total Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% pendingOrders.forEach(order => { %>
+            <tr>
+                <td><%= order._id %></td>
+                <td><%= order.shippingDetails.name %></td>
+                <td><%= order.shippingDetails.email %></td>
+                <td><%= order.shippingDetails.address %></td>
+                <td>PKR <%= order.totalAmount %></td>
+                <td>
+                    <form action="/admin/orders/mark-complete/<%= order._id %>" method="POST" style="display:inline;">
+                        <button class="btn btn-success btn-sm">Mark Complete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <!-- Completed Orders -->
+    <h4>Completed Orders</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% completedOrders.forEach(order => { %>
+            <tr>
+                <td><%= order._id %></td>
+                <td><%= order.shippingDetails.name %></td>
+                <td><%= order.shippingDetails.email %></td>
+                <td><%= order.shippingDetails.address %></td>
+                <td>PKR <%= order.totalAmount %></td>
+                <td>Completed</td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

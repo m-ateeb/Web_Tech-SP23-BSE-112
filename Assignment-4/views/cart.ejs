@@ -17,108 +17,32 @@
                 <% totalAmount += productTotal; %>
                 <tr>
                     <td><%= product.title %></td>
-                    <td><%= product.price %></td>
+                    <td>PKR <%= product.price.toFixed(2) %></td>
                     <td>
-                        <input type="number" class="form-control quantity" value="<%= product.quantity %>" data-id="<%= product._id %>" min="1" />
+                        <!-- Quantity update with + and - buttons -->
+                        <form action="/update-quantity/<%= product._id %>" method="POST" style="display:inline;">
+                            <button type="submit" name="action" value="decrease" class="btn btn-sm btn-secondary">-</button>
+                            <input type="number" name="quantity" value="<%= product.quantity %>" min="1" style="width: 60px; text-align: center;">
+                            <button type="submit" name="action" value="increase" class="btn btn-sm btn-secondary">+</button>
+                        </form>
                     </td>
-                    <td><%= productTotal %></td>
+                    <td>PKR <%= productTotal.toFixed(2) %></td>
                     <td>
-                        <a href="/remove-from-cart/<%= product._id %>" class="btn btn-danger btn-sm">Remove</a>
+                        <form action="/remove-from-cart/<%= product._id %>" method="GET" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
                     </td>
                 </tr>
-            <% }) %>
+            <% }); %>
         </tbody>
     </table>
 
     <div class="row">
         <div class="col">
-            <h5>Total: PKR <%= totalAmount %></h5>
+            <h5>Total: PKR <%= totalAmount.toFixed(2) %></h5>
         </div>
     </div>
 
     <!-- Checkout Button -->
-    <button id="checkout-btn" class="btn btn-success" data-toggle="modal" data-target="#checkoutModal">Checkout</button>
+    <a href="/checkout" class="btn btn-success">Checkout</a>
 </div>
-
-<!-- Checkout Modal -->
-<div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="checkout-form" action="/checkout" method="post">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Shipping Address</label>
-                        <textarea class="form-control" id="address" name="address" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Confirm Order</button>
-                </form>
-                <div id="order-confirmation" style="display:none;" class="mt-3">
-                    <p>Your order has been confirmed! Thank you for shopping with us.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Handle quantity change
-    document.querySelectorAll('.quantity').forEach(input => {
-        input.addEventListener('change', (event) => {
-            const productId = event.target.dataset.id;
-            const quantity = event.target.value;
-
-            // Update quantity in the cart (make a PUT or PATCH request to backend)
-            fetch(`/update-cart/${productId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ quantity: quantity })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Update the cart UI or reload the page
-                location.reload();
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-
-    // Checkout form submission handling
-    const checkoutForm = document.getElementById('checkout-form');
-    checkoutForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(checkoutForm);
-
-        fetch('/checkout', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Show success message
-                document.getElementById('order-confirmation').style.display = 'block';
-                checkoutForm.style.display = 'none';
-            } else {
-                alert('Something went wrong. Please try again.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
-</script>

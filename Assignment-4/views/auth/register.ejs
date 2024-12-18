@@ -1,15 +1,83 @@
-<form action="" method="post">
-    <div class="form-group">
-        <label for="">Name</label>
-        <input type="text" class="form-control" name="name" value="Usman Akram"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .signup-container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .signup-container h2 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .signup-btn {
+            width: 100%;
+            font-weight: bold;
+        }
+        .message {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>Create Your Account</h2>
+
+    <!-- Success Message -->
+
+    <!-- Signup Form -->
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" name="name" id="name" required placeholder="Enter your full name" value="Usman Akram"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" name="email" id="email" required placeholder="Enter your email" value="usman.akram@gmail.com"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" required placeholder="Enter your password" value="usman"/>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required placeholder="Confirm your password"/>
+        </div>
+        <button type="submit" class="btn btn-info signup-btn">Register</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p>Already have an account? <a href="/login">Login here</a></p>
     </div>
-    <div class="form-group">
-        <label for="">Email</label>
-        <input type="text" class="form-control" name="email" value="usman.akram@gmail.com"/>
-    </div>
-    <div class="form-group">
-        <label for="">Password</label>
-        <input type="password" class="form-control" name="password" value="usman"/>
-    </div>
-    <button type="submit" class="btn btn-info">Register</button>
-</form>
+</div>
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
